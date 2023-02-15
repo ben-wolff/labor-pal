@@ -198,6 +198,8 @@ export const ArrivalGuesser = () => {
 			<input onChange={handleNameChange} />
 			<br />
 			Guess:
+			{/* 
+      // @ts-ignore */}
 			<Datetime onChange={onDateTimeChange} />
 			<button onClick={submitGuess}>Submit Guess!</button>
 			<br />
