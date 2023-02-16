@@ -1,9 +1,11 @@
 import { ChangeEvent, useState } from "react";
 import "./App.css";
 import axios from "axios";
-import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import moment, { Moment } from "moment";
+import DT from "react-datetime";
+// @ts-ignore
+const DateTime = DT.default ? DT.default : DT;
 
 interface Encouragement {
 	name: string;
@@ -200,7 +202,7 @@ export const ArrivalGuesser = () => {
 			Guess:
 			{/* 
       // @ts-ignore */}
-			<Datetime onChange={onDateTimeChange} />
+			<DateTime onChange={onDateTimeChange} />
 			<button onClick={submitGuess}>Submit Guess!</button>
 			<br />
 			<br />
