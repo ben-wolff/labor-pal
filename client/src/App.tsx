@@ -26,6 +26,7 @@ export const Encouragement = () => {
 		content: "",
 	});
 	const [newEncouragement, setNewEncouragement] = useState("");
+	const [loading, setLoading] = useState(false);
 
 	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setName(e.currentTarget.value);
@@ -57,6 +58,7 @@ export const Encouragement = () => {
 
 	const getRandomEncouragement = () => {
 		(async () => {
+			setLoading(true);
 			try {
 				const res = await axios.get(`${DB_URL}/encouragement`);
 				console.log(res);
@@ -64,6 +66,7 @@ export const Encouragement = () => {
 			} catch (e) {
 				console.log(e);
 			}
+			setLoading(false);
 		})();
 	};
 
@@ -91,9 +94,13 @@ export const Encouragement = () => {
 				Load Random Encouragement
 			</button>
 			<i>
-				<p>
-					{encouragement.content} -- <b>{encouragement.name}</b>
-				</p>
+				{loading ? (
+					<p>...LOADING...</p>
+				) : (
+					<p>
+						{encouragement.content} -- <b>{encouragement.name}</b>
+					</p>
+				)}
 			</i>
 		</div>
 	);
