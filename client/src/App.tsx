@@ -7,6 +7,7 @@ import DT from "react-datetime";
 // @ts-ignore
 const DateTime = DT.default ? DT.default : DT;
 
+const DB_URL = import.meta.env.VITE_DB_URL;
 interface Encouragement {
 	name: string;
 	content: string;
@@ -44,7 +45,7 @@ export const Encouragement = () => {
 		(async () => {
 			try {
 				const res = await axios.post(
-					"http://localhost:4000/submitEncouragement",
+					`${DB_URL}/submitEncouragement`,
 					newSubmission
 				);
 				console.log(res);
@@ -57,9 +58,7 @@ export const Encouragement = () => {
 	const getRandomEncouragement = () => {
 		(async () => {
 			try {
-				const res = await axios.get(
-					"http://localhost:4000/encouragement"
-				);
+				const res = await axios.get(`${DB_URL}/encouragement`);
 				console.log(res);
 				setEncouragement(res.data);
 			} catch (e) {
@@ -155,7 +154,7 @@ export const ArrivalGuesser = () => {
 	const fetchGuesses = () => {
 		(async () => {
 			try {
-				const res = await axios.get("http://localhost:4000/guesses");
+				const res = await axios.get(`${DB_URL}/guesses`);
 				console.log(res.data);
 				setGuesses(res?.data);
 				setShowResults(true);
@@ -174,10 +173,7 @@ export const ArrivalGuesser = () => {
 
 		(async () => {
 			try {
-				const res = await axios.post(
-					"http://localhost:4000/submitGuess",
-					guess
-				);
+				const res = await axios.post(`${DB_URL}/submitGuess`, guess);
 				console.log(res);
 			} catch (e) {
 				console.log(e);
